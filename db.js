@@ -90,7 +90,9 @@ async function initDb() {
     impressum: '© 2026 | Alle Rechte vorbehalten',
     facebook_url: '',
     youtube_url: '',
-    instagram_url: ''
+    instagram_url: '',
+    meta_description: 'Die Udo Jürgens Story – Sein Leben, seine Liebe, seine Musik. Eine Hommage an den Grandseigneur der Unterhaltungsbranche.',
+    og_image: ''
   };
 
   Object.entries(defaultSettings).forEach(([key, value]) => {

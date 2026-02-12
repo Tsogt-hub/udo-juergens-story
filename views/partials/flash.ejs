@@ -1,12 +1,14 @@
+<div aria-live="polite" aria-atomic="true">
 <% if (typeof success !== 'undefined' && success.length > 0) { %>
-  <div class="flash flash-success">
+  <div class="flash flash-success" role="alert">
     <span><%= success[0] %></span>
-    <button class="flash-close" onclick="this.parentElement.remove()">&times;</button>
+    <button class="flash-close" aria-label="Nachricht schließen" onclick="this.parentElement.remove()">&times;</button>
   </div>
 <% } %>
 <% if (typeof error !== 'undefined' && error.length > 0) { %>
-  <div class="flash flash-error">
+  <div class="flash flash-error" role="alert">
     <span><%= error[0] %></span>
-    <button class="flash-close" onclick="this.parentElement.remove()">&times;</button>
+    <button class="flash-close" aria-label="Nachricht schließen" onclick="this.parentElement.remove()">&times;</button>
   </div>
 <% } %>
+</div>

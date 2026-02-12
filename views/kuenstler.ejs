@@ -58,8 +58,8 @@
   <% } %>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
-    <button class="lightbox-close">&times;</button>
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()" role="dialog" aria-modal="true" aria-label="Bildansicht">
+    <button class="lightbox-close" aria-label="Bild schließen">&times;</button>
     <img src="" alt="Vollbild" id="lightboxImg">
   </div>
 

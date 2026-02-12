@@ -1,6 +1,7 @@
 const express = require('express');
 const session = require('express-session');
 const flash = require('connect-flash');
+const compression = require('compression');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
@@ -10,12 +11,18 @@ const { initDb, getDb } = require('./db');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+// Compression (gzip)
+app.use(compression());
+
 // View engine
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
-// Static files
-app.use(express.static(path.join(__dirname, 'public')));
+// Static files with caching
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: process.env.NODE_ENV === 'production' ? '7d' : 0,
+  etag: true
+}));
 
 // Body parser
 app.use(express.urlencoded({ extended: true }));
@@ -23,7 +30,7 @@ app.use(express.json());
 
 // Session
 app.use(session({
-  secret: 'udo-juergens-secret-key-2026',
+  secret: process.env.SESSION_SECRET || 'udo-juergens-secret-key-2026',
   resave: false,
   saveUninitialized: false,
   cookie: { maxAge: 24 * 60 * 60 * 1000 } // 24 hours
