@@ -1320,6 +1320,11 @@ img {
   font-size: 1.25rem;
 }
 
+/* Mobile social icons (hidden on desktop) */
+.nav-menu-social {
+  display: none;
+}
+
 /* ============================================
    Responsive Design
    ============================================ */
@@ -1358,14 +1363,40 @@ img {
     font-size: 17px;
   }
 
+  .nav-container {
+    padding: 0 1.25rem;
+    height: 64px;
+  }
+
+  .navbar.shrink .nav-container {
+    height: 56px;
+  }
+
+  .nav-logo {
+    font-size: 1.15rem;
+    flex-shrink: 1;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: calc(100vw - 80px);
+  }
+
   .nav-toggle {
     display: flex;
+    order: 2;
+    flex-shrink: 0;
+  }
+
+  /* Social icons hidden in navbar on mobile, shown inside menu */
+  .nav-social-icons {
+    display: none;
   }
 
   .nav-menu {
     display: none;
     position: absolute;
-    top: 76px;
+    top: 64px;
     left: 0;
     right: 0;
     background: var(--color-primary);
@@ -1377,6 +1408,7 @@ img {
     opacity: 0;
     transition: all 0.3s var(--ease);
     pointer-events: none;
+    z-index: 999;
   }
 
   .nav-menu.active {
@@ -1399,17 +1431,42 @@ img {
   }
 
   .nav-menu a {
-    padding: 0.85rem 2rem;
+    padding: 0.85rem 1.5rem;
     border-radius: 0;
     min-height: 48px;
+    font-size: 1.05rem;
   }
 
-  .nav-social-icons {
-    border-left: none;
-    margin-left: 0;
-    padding-left: 0;
-    padding: 0.85rem 2rem;
-    gap: 0.75rem;
+  /* Mobile social icons inside the menu */
+  .nav-menu-social {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem 1.5rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 0.5rem;
+  }
+
+  .nav-menu-social a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.85);
+    transition: var(--transition);
+  }
+
+  .nav-menu-social a:hover {
+    background: var(--color-secondary);
+    color: var(--color-dark);
+  }
+
+  .nav-menu-social svg {
+    width: 20px;
+    height: 20px;
   }
 
   .section {
