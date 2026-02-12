@@ -1518,20 +1518,131 @@ img {
   }
 
   .page-header {
-    padding: 8rem 1.5rem 3rem;
+    padding: 7rem 1.25rem 2.5rem;
+  }
+
+  .page-header h1 {
+    font-size: 2rem;
+  }
+
+  .page-header-sub {
+    font-size: 1rem;
+  }
+
+  .page-header::after {
+    height: 40px;
+  }
+
+  /* --- Künstler-Seite Mobile --- */
+  .artist-layout {
+    gap: 2rem;
+  }
+
+  .artist-image-large img,
+  .artist-image-large .placeholder-image {
+    aspect-ratio: 4/3;
+    max-height: 300px;
+  }
+
+  .placeholder-large {
+    min-height: 250px;
+  }
+
+  .artist-bio h2 {
+    font-size: 1.8rem;
+  }
+
+  .artist-bio h3 {
+    font-size: 1.15rem;
+  }
+
+  .artist-bio p {
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+  }
+
+  /* Galerie auf 2 Spalten (auch gallery-full) */
+  .gallery-full {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.75rem;
+  }
+
+  /* --- About Section Mobile --- */
+  .about-text .section-title {
+    font-size: 1.8rem;
+  }
+
+  .about-text p {
+    font-size: 1rem;
+  }
+
+  /* --- Kontakt Mobile --- */
+  .kontakt-info h2,
+  .kontakt-form-wrapper h2 {
+    font-size: 1.5rem;
   }
 }
 
 @media (max-width: 480px) {
-  .gallery-grid {
-    grid-template-columns: 1fr;
+  .gallery-grid,
+  .gallery-full {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem;
   }
 
   .container {
-    padding: 0 1.25rem;
+    padding: 0 1rem;
+  }
+
+  .section {
+    padding: 3rem 0;
   }
 
   .section-title {
-    font-size: 2rem;
+    font-size: 1.75rem;
+  }
+
+  .artist-bio h2 {
+    font-size: 1.6rem;
+  }
+
+  .artist-image-large img,
+  .artist-image-large .placeholder-image {
+    max-height: 240px;
+  }
+
+  .placeholder-large {
+    min-height: 200px;
+  }
+
+  .page-header {
+    padding: 6rem 1rem 2rem;
+  }
+
+  .page-header h1 {
+    font-size: 1.75rem;
+  }
+
+  .termin-card {
+    padding: 1.25rem;
+  }
+
+  .termin-row {
+    padding: 1.25rem;
+  }
+
+  .kritik-card {
+    padding: 1.5rem;
+  }
+
+  .btn {
+    padding: 0.85rem 1.5rem;
+    font-size: 1rem;
+    width: 100%;
+  }
+
+  .btn-small {
+    width: auto;
   }
 }
