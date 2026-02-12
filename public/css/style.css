@@ -1366,6 +1366,10 @@ img {
   .nav-container {
     padding: 0 1.25rem;
     height: 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: nowrap;
   }
 
   .navbar.shrink .nav-container {
@@ -1374,23 +1378,24 @@ img {
 
   .nav-logo {
     font-size: 1.15rem;
-    flex-shrink: 1;
+    flex: 0 1 auto;
     min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    max-width: calc(100vw - 80px);
+    order: 0;
   }
 
   .nav-toggle {
     display: flex;
-    order: 2;
-    flex-shrink: 0;
+    flex: 0 0 auto;
+    order: 1;
+    margin-left: auto;
   }
 
-  /* Social icons hidden in navbar on mobile, shown inside menu */
+  /* Social icons and menu hidden in navbar on mobile */
   .nav-social-icons {
-    display: none;
+    display: none !important;
   }
 
   .nav-menu {
@@ -1399,6 +1404,7 @@ img {
     top: 64px;
     left: 0;
     right: 0;
+    width: 100%;
     background: var(--color-primary);
     flex-direction: column;
     padding: 1rem 0;
@@ -1409,6 +1415,7 @@ img {
     transition: all 0.3s var(--ease);
     pointer-events: none;
     z-index: 999;
+    order: 3;
   }
 
   .nav-menu.active {
