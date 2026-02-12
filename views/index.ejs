@@ -1,0 +1,105 @@
+<%- include('partials/header', { pageTitle: 'Home' }) %>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <% if (settings.hero_image) { %>
+      <div class="hero-bg" style="background-image: url('<%= settings.hero_image %>')"></div>
+    <% } %>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title"><%= settings.site_title || 'Die Udo Jürgens Story' %></h1>
+      <p class="hero-subtitle"><%= settings.site_subtitle || 'Sein Leben, seine Liebe, seine Musik' %></p>
+      <p class="hero-tagline">Eine Hommage an den Grandseigneur der Unterhaltungsbranche</p>
+      <a href="/termine" class="btn btn-primary">Termine ansehen</a>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="section section-about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-image">
+          <% if (settings.artist_image) { %>
+            <img src="<%= settings.artist_image %>" alt="<%= settings.artist_name %>">
+          <% } else { %>
+            <div class="placeholder-image">
+              <span>🎹</span>
+            </div>
+          <% } %>
+        </div>
+        <div class="about-text">
+          <h2 class="section-title"><%= settings.artist_name || 'Der Künstler' %></h2>
+          <h3 class="section-subtitle"><%= settings.artist_role || 'Sänger & Pianist' %></h3>
+          <div class="divider"></div>
+          <% if (settings.artist_bio) { %>
+            <% settings.artist_bio.split('\n').forEach(function(paragraph) { %>
+              <% if (paragraph.trim()) { %>
+                <p><%= paragraph %></p>
+              <% } %>
+            <% }); %>
+          <% } %>
+          <a href="/kuenstler" class="btn btn-outline">Mehr erfahren</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Upcoming Events -->
+  <% if (termine.length > 0) { %>
+  <section class="section section-termine">
+    <div class="container">
+      <h2 class="section-title text-center">Nächste Termine</h2>
+      <div class="divider divider-center"></div>
+      <div class="termine-grid">
+        <% termine.forEach(function(termin) { %>
+          <div class="termin-card">
+            <div class="termin-date">
+              <span class="termin-day"><%= new Date(termin.datum).getDate() %></span>
+              <span class="termin-month"><%= ['Jan','Feb','Mär','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Dez'][new Date(termin.datum).getMonth()] %></span>
+              <span class="termin-year"><%= new Date(termin.datum).getFullYear() %></span>
+            </div>
+            <div class="termin-info">
+              <h3><%= termin.venue %></h3>
+              <p class="termin-stadt"><%= termin.stadt %></p>
+              <% if (termin.zeit) { %><p class="termin-zeit">🕐 <%= termin.zeit %> Uhr</p><% } %>
+              <% if (termin.beschreibung) { %><p class="termin-desc"><%= termin.beschreibung %></p><% } %>
+            </div>
+            <% if (termin.ticket_link) { %>
+              <a href="<%= termin.ticket_link %>" target="_blank" class="btn btn-small">Tickets</a>
+            <% } %>
+          </div>
+        <% }); %>
+      </div>
+      <div class="text-center" style="margin-top: 2rem;">
+        <a href="/termine" class="btn btn-outline">Alle Termine</a>
+      </div>
+    </div>
+  </section>
+  <% } %>
+
+  <!-- Gallery Preview -->
+  <% if (images.length > 0) { %>
+  <section class="section section-gallery">
+    <div class="container">
+      <h2 class="section-title text-center">Impressionen</h2>
+      <div class="divider divider-center"></div>
+      <div class="gallery-grid">
+        <% images.forEach(function(img) { %>
+          <div class="gallery-item">
+            <img src="/uploads/images/<%= img.filename %>" alt="<%= img.title || 'Impression' %>" loading="lazy">
+            <% if (img.title) { %>
+              <div class="gallery-overlay">
+                <p><%= img.title %></p>
+              </div>
+            <% } %>
+          </div>
+        <% }); %>
+      </div>
+      <div class="text-center" style="margin-top: 2rem;">
+        <a href="/kuenstler" class="btn btn-outline">Alle Bilder</a>
+      </div>
+    </div>
+  </section>
+  <% } %>
+
+<%- include('partials/footer') %>

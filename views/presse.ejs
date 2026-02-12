@@ -1,0 +1,24 @@
+<%- include('partials/header', { pageTitle: 'Presse & Videos' }) %>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1>Presse & Videos</h1>
+    <p class="page-header-sub">Medienberichte und Videoaufnahmen</p>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="presse-content">
+        <p>Hier finden Sie in Kürze Presseberichte und Videoaufnahmen unserer Auftritte.</p>
+
+        <% if (settings.youtube_url) { %>
+          <div class="presse-links">
+            <h3>Unsere Videos</h3>
+            <a href="<%= settings.youtube_url %>" target="_blank" class="btn btn-primary">YouTube-Kanal besuchen</a>
+          </div>
+        <% } %>
+      </div>
+    </div>
+  </section>
+
+<%- include('partials/footer') %>

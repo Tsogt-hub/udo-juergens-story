@@ -1,0 +1,116 @@
+<%- include('partials/admin-header', { pageTitle: 'Einstellungen' }) %>
+
+  <!-- Site Settings -->
+  <div class="admin-card">
+    <h2>Website-Einstellungen</h2>
+    <form method="POST" action="/admin/einstellungen" enctype="multipart/form-data" class="admin-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="site_title">Website-Titel</label>
+          <input type="text" id="site_title" name="site_title" value="<%= settings.site_title || '' %>">
+        </div>
+        <div class="form-group">
+          <label for="site_subtitle">Untertitel</label>
+          <input type="text" id="site_subtitle" name="site_subtitle" value="<%= settings.site_subtitle || '' %>">
+        </div>
+      </div>
+
+      <h3 style="margin-top: 1.5rem;">Künstler-Informationen</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="artist_name">Künstlername</label>
+          <input type="text" id="artist_name" name="artist_name" value="<%= settings.artist_name || '' %>">
+        </div>
+        <div class="form-group">
+          <label for="artist_role">Rolle / Beschreibung</label>
+          <input type="text" id="artist_role" name="artist_role" value="<%= settings.artist_role || '' %>">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="artist_bio">Biografie</label>
+        <textarea id="artist_bio" name="artist_bio" rows="8"><%= settings.artist_bio || '' %></textarea>
+      </div>
+
+      <h3 style="margin-top: 1.5rem;">Bilder</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="hero_image">Hero-Bild (Startseite)</label>
+          <input type="file" id="hero_image" name="hero_image" accept="image/*">
+          <% if (settings.hero_image) { %>
+            <div class="current-image"><img src="<%= settings.hero_image %>" alt="Hero" style="max-width:200px;margin-top:0.5rem;border-radius:8px;"></div>
+          <% } %>
+        </div>
+        <div class="form-group">
+          <label for="artist_image">Künstler-Bild</label>
+          <input type="file" id="artist_image" name="artist_image" accept="image/*">
+          <% if (settings.artist_image) { %>
+            <div class="current-image"><img src="<%= settings.artist_image %>" alt="Künstler" style="max-width:200px;margin-top:0.5rem;border-radius:8px;"></div>
+          <% } %>
+        </div>
+      </div>
+
+      <h3 style="margin-top: 1.5rem;">Kontaktdaten</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="kontakt_email">E-Mail</label>
+          <input type="email" id="kontakt_email" name="kontakt_email" value="<%= settings.kontakt_email || '' %>">
+        </div>
+        <div class="form-group">
+          <label for="kontakt_telefon">Telefon</label>
+          <input type="text" id="kontakt_telefon" name="kontakt_telefon" value="<%= settings.kontakt_telefon || '' %>">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="kontakt_adresse">Adresse</label>
+        <textarea id="kontakt_adresse" name="kontakt_adresse" rows="2"><%= settings.kontakt_adresse || '' %></textarea>
+      </div>
+
+      <h3 style="margin-top: 1.5rem;">Social Media</h3>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="facebook_url">Facebook URL</label>
+          <input type="url" id="facebook_url" name="facebook_url" value="<%= settings.facebook_url || '' %>" placeholder="https://facebook.com/...">
+        </div>
+        <div class="form-group">
+          <label for="youtube_url">YouTube URL</label>
+          <input type="url" id="youtube_url" name="youtube_url" value="<%= settings.youtube_url || '' %>" placeholder="https://youtube.com/...">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="instagram_url">Instagram URL</label>
+        <input type="url" id="instagram_url" name="instagram_url" value="<%= settings.instagram_url || '' %>" placeholder="https://instagram.com/...">
+      </div>
+
+      <h3 style="margin-top: 1.5rem;">Sonstiges</h3>
+      <div class="form-group">
+        <label for="impressum">Impressum / Copyright</label>
+        <textarea id="impressum" name="impressum" rows="2"><%= settings.impressum || '' %></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-primary">Einstellungen speichern</button>
+    </form>
+  </div>
+
+  <!-- Password Change -->
+  <div class="admin-card">
+    <h2>Passwort ändern</h2>
+    <form method="POST" action="/admin/passwort" class="admin-form">
+      <div class="form-group">
+        <label for="current_password">Aktuelles Passwort</label>
+        <input type="password" id="current_password" name="current_password" required>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="new_password">Neues Passwort</label>
+          <input type="password" id="new_password" name="new_password" required minlength="6">
+        </div>
+        <div class="form-group">
+          <label for="confirm_password">Passwort bestätigen</label>
+          <input type="password" id="confirm_password" name="confirm_password" required minlength="6">
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Passwort ändern</button>
+    </form>
+  </div>
+
+<%- include('partials/admin-footer') %>

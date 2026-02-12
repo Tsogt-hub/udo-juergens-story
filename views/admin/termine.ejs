@@ -1,0 +1,128 @@
+<%- include('partials/admin-header', { pageTitle: 'Termine' }) %>
+
+  <!-- Add Termin Form -->
+  <div class="admin-card">
+    <h2>Neuen Termin hinzufügen</h2>
+    <form method="POST" action="/admin/termine/add" class="admin-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="datum">Datum *</label>
+          <input type="date" id="datum" name="datum" required>
+        </div>
+        <div class="form-group">
+          <label for="zeit">Uhrzeit</label>
+          <input type="text" id="zeit" name="zeit" placeholder="z.B. 19:30">
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="venue">Veranstaltungsort *</label>
+          <input type="text" id="venue" name="venue" required placeholder="z.B. Stadthalle">
+        </div>
+        <div class="form-group">
+          <label for="stadt">Stadt *</label>
+          <input type="text" id="stadt" name="stadt" required placeholder="z.B. Wien">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="beschreibung">Beschreibung</label>
+        <textarea id="beschreibung" name="beschreibung" rows="2" placeholder="Optionale Beschreibung"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="ticket_link">Ticket-Link</label>
+        <input type="url" id="ticket_link" name="ticket_link" placeholder="https://...">
+      </div>
+      <button type="submit" class="btn btn-primary">Termin hinzufügen</button>
+    </form>
+  </div>
+
+  <!-- Existing Termine -->
+  <div class="admin-card">
+    <h2>Alle Termine (<%= termine.length %>)</h2>
+    <% if (termine.length > 0) { %>
+      <div class="admin-table-wrapper">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Datum</th>
+              <th>Uhrzeit</th>
+              <th>Veranstaltungsort</th>
+              <th>Stadt</th>
+              <th>Tickets</th>
+              <th>Aktionen</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% termine.forEach(function(termin) { %>
+              <tr>
+                <td><%= termin.datum %></td>
+                <td><%= termin.zeit || '–' %></td>
+                <td><%= termin.venue %></td>
+                <td><%= termin.stadt %></td>
+                <td>
+                  <% if (termin.ticket_link) { %>
+                    <a href="<%= termin.ticket_link %>" target="_blank">Link</a>
+                  <% } else { %>
+                    –
+                  <% } %>
+                </td>
+                <td class="actions-cell">
+                  <button class="btn btn-small btn-outline" onclick="toggleEdit(<%= termin.id %>)">Bearbeiten</button>
+                  <form method="POST" action="/admin/termine/delete/<%= termin.id %>" style="display:inline" onsubmit="return confirm('Termin wirklich löschen?')">
+                    <button type="submit" class="btn btn-small btn-danger">Löschen</button>
+                  </form>
+                </td>
+              </tr>
+              <tr class="edit-row" id="edit-<%= termin.id %>" style="display:none">
+                <td colspan="6">
+                  <form method="POST" action="/admin/termine/edit/<%= termin.id %>" class="admin-form inline-form">
+                    <div class="form-row">
+                      <div class="form-group">
+                        <label>Datum</label>
+                        <input type="date" name="datum" value="<%= termin.datum %>" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Uhrzeit</label>
+                        <input type="text" name="zeit" value="<%= termin.zeit || '' %>">
+                      </div>
+                      <div class="form-group">
+                        <label>Ort</label>
+                        <input type="text" name="venue" value="<%= termin.venue %>" required>
+                      </div>
+                      <div class="form-group">
+                        <label>Stadt</label>
+                        <input type="text" name="stadt" value="<%= termin.stadt %>" required>
+                      </div>
+                    </div>
+                    <div class="form-row">
+                      <div class="form-group">
+                        <label>Beschreibung</label>
+                        <input type="text" name="beschreibung" value="<%= termin.beschreibung || '' %>">
+                      </div>
+                      <div class="form-group">
+                        <label>Ticket-Link</label>
+                        <input type="url" name="ticket_link" value="<%= termin.ticket_link || '' %>">
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-small">Speichern</button>
+                    <button type="button" class="btn btn-outline btn-small" onclick="toggleEdit(<%= termin.id %>)">Abbrechen</button>
+                  </form>
+                </td>
+              </tr>
+            <% }); %>
+          </tbody>
+        </table>
+      </div>
+    <% } else { %>
+      <p class="empty-text">Noch keine Termine vorhanden.</p>
+    <% } %>
+  </div>
+
+  <script>
+    function toggleEdit(id) {
+      const row = document.getElementById('edit-' + id);
+      row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+    }
+  </script>
+
+<%- include('partials/admin-footer') %>

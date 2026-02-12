@@ -1,0 +1,86 @@
+<%- include('partials/header', { pageTitle: 'Kontakt' }) %>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1>Kontakt</h1>
+    <p class="page-header-sub">Nehmen Sie Kontakt mit uns auf</p>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="kontakt-grid">
+        <div class="kontakt-info">
+          <h2>Kontaktinformationen</h2>
+          <div class="divider"></div>
+
+          <% if (settings.kontakt_email) { %>
+            <div class="kontakt-item">
+              <span class="kontakt-icon">✉</span>
+              <div>
+                <strong>E-Mail</strong>
+                <a href="mailto:<%= settings.kontakt_email %>"><%= settings.kontakt_email %></a>
+              </div>
+            </div>
+          <% } %>
+
+          <% if (settings.kontakt_telefon) { %>
+            <div class="kontakt-item">
+              <span class="kontakt-icon">📞</span>
+              <div>
+                <strong>Telefon</strong>
+                <p><%= settings.kontakt_telefon %></p>
+              </div>
+            </div>
+          <% } %>
+
+          <% if (settings.kontakt_adresse) { %>
+            <div class="kontakt-item">
+              <span class="kontakt-icon">📍</span>
+              <div>
+                <strong>Adresse</strong>
+                <p><%= settings.kontakt_adresse %></p>
+              </div>
+            </div>
+          <% } %>
+
+          <div class="kontakt-social">
+            <% if (settings.facebook_url) { %>
+              <a href="<%= settings.facebook_url %>" target="_blank" class="btn btn-outline btn-small">Facebook</a>
+            <% } %>
+            <% if (settings.youtube_url) { %>
+              <a href="<%= settings.youtube_url %>" target="_blank" class="btn btn-outline btn-small">YouTube</a>
+            <% } %>
+            <% if (settings.instagram_url) { %>
+              <a href="<%= settings.instagram_url %>" target="_blank" class="btn btn-outline btn-small">Instagram</a>
+            <% } %>
+          </div>
+        </div>
+
+        <div class="kontakt-form-wrapper">
+          <h2>Nachricht senden</h2>
+          <div class="divider"></div>
+          <form class="kontakt-form" action="mailto:<%= settings.kontakt_email || '' %>" method="post" enctype="text/plain">
+            <div class="form-group">
+              <label for="name">Name</label>
+              <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+              <label for="email">E-Mail</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="betreff">Betreff</label>
+              <input type="text" id="betreff" name="betreff">
+            </div>
+            <div class="form-group">
+              <label for="nachricht">Nachricht</label>
+              <textarea id="nachricht" name="nachricht" rows="5" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Nachricht senden</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<%- include('partials/footer') %>

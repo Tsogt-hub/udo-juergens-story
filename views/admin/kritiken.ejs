@@ -1,0 +1,53 @@
+<%- include('partials/admin-header', { pageTitle: 'Kritiken' }) %>
+
+  <!-- Add Kritik Form -->
+  <div class="admin-card">
+    <h2>Neue Kritik hinzufügen</h2>
+    <form method="POST" action="/admin/kritiken/add" class="admin-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="stadt">Stadt / Ort *</label>
+          <input type="text" id="stadt" name="stadt" required placeholder="z.B. Wien">
+        </div>
+        <div class="form-group">
+          <label for="quelle">Quelle</label>
+          <input type="text" id="quelle" name="quelle" placeholder="z.B. Tageszeitung">
+        </div>
+        <div class="form-group">
+          <label for="datum">Datum</label>
+          <input type="text" id="datum" name="datum" placeholder="z.B. März 2026">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="text">Kritik-Text *</label>
+        <textarea id="text" name="text" rows="4" required placeholder="Der Text der Kritik..."></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Kritik hinzufügen</button>
+    </form>
+  </div>
+
+  <!-- Existing Kritiken -->
+  <div class="admin-card">
+    <h2>Alle Kritiken (<%= kritiken.length %>)</h2>
+    <% if (kritiken.length > 0) { %>
+      <div class="admin-kritiken-list">
+        <% kritiken.forEach(function(kritik) { %>
+          <div class="admin-kritik-item">
+            <div class="admin-kritik-text">
+              <strong><%= kritik.stadt %></strong>
+              <% if (kritik.quelle) { %> – <em><%= kritik.quelle %></em><% } %>
+              <% if (kritik.datum) { %> (<%= kritik.datum %>)<% } %>
+              <p>"<%= kritik.text %>"</p>
+            </div>
+            <form method="POST" action="/admin/kritiken/delete/<%= kritik.id %>" onsubmit="return confirm('Kritik wirklich löschen?')">
+              <button type="submit" class="btn btn-small btn-danger">Löschen</button>
+            </form>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <p class="empty-text">Noch keine Kritiken vorhanden.</p>
+    <% } %>
+  </div>
+
+<%- include('partials/admin-footer') %>

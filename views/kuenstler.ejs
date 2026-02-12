@@ -1,0 +1,66 @@
+<%- include('partials/header', { pageTitle: settings.artist_name || 'Künstler' }) %>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1><%= settings.artist_name || 'Der Künstler' %></h1>
+    <p class="page-header-sub"><%= settings.artist_role || 'Sänger & Pianist' %></p>
+  </section>
+
+  <!-- Artist Bio -->
+  <section class="section">
+    <div class="container">
+      <div class="artist-layout">
+        <div class="artist-image-large">
+          <% if (settings.artist_image) { %>
+            <img src="<%= settings.artist_image %>" alt="<%= settings.artist_name %>">
+          <% } else { %>
+            <div class="placeholder-image placeholder-large">
+              <span>🎹</span>
+            </div>
+          <% } %>
+        </div>
+        <div class="artist-bio">
+          <h2><%= settings.artist_name || 'Der Künstler' %></h2>
+          <h3><%= settings.artist_role || 'Sänger & Pianist' %></h3>
+          <div class="divider"></div>
+          <% if (settings.artist_bio) { %>
+            <% settings.artist_bio.split('\n').forEach(function(paragraph) { %>
+              <% if (paragraph.trim()) { %>
+                <p><%= paragraph %></p>
+              <% } %>
+            <% }); %>
+          <% } %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <% if (images.length > 0) { %>
+  <section class="section section-gallery-full">
+    <div class="container">
+      <h2 class="section-title text-center">Galerie</h2>
+      <div class="divider divider-center"></div>
+      <div class="gallery-grid gallery-full">
+        <% images.forEach(function(img) { %>
+          <div class="gallery-item">
+            <img src="/uploads/images/<%= img.filename %>" alt="<%= img.title || 'Galerie' %>" loading="lazy" onclick="openLightbox(this.src)">
+            <% if (img.title) { %>
+              <div class="gallery-overlay">
+                <p><%= img.title %></p>
+              </div>
+            <% } %>
+          </div>
+        <% }); %>
+      </div>
+    </div>
+  </section>
+  <% } %>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox()">
+    <button class="lightbox-close">&times;</button>
+    <img src="" alt="Vollbild" id="lightboxImg">
+  </div>
+
+<%- include('partials/footer') %>

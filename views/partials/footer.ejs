@@ -1,0 +1,50 @@
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3><%= settings.site_title || 'Die Udo Jürgens Story' %></h3>
+          <p><%= settings.site_subtitle || 'Sein Leben, seine Liebe, seine Musik' %></p>
+        </div>
+        <div class="footer-section">
+          <h3>Navigation</h3>
+          <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/kuenstler">Künstler</a></li>
+            <li><a href="/termine">Termine</a></li>
+            <li><a href="/kontakt">Kontakt</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Kontakt</h3>
+          <% if (settings.kontakt_email) { %>
+            <p>E-Mail: <a href="mailto:<%= settings.kontakt_email %>"><%= settings.kontakt_email %></a></p>
+          <% } %>
+          <% if (settings.kontakt_telefon) { %>
+            <p>Telefon: <%= settings.kontakt_telefon %></p>
+          <% } %>
+          <div class="footer-social">
+            <% if (settings.facebook_url) { %>
+              <a href="<%= settings.facebook_url %>" target="_blank">Facebook</a>
+            <% } %>
+            <% if (settings.youtube_url) { %>
+              <a href="<%= settings.youtube_url %>" target="_blank">YouTube</a>
+            <% } %>
+            <% if (settings.instagram_url) { %>
+              <a href="<%= settings.instagram_url %>" target="_blank">Instagram</a>
+            <% } %>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p><%= settings.impressum || '© 2026 | Alle Rechte vorbehalten' %></p>
+        <% if (isLoggedIn) { %>
+          <a href="/admin" class="admin-link">Admin-Panel</a>
+        <% } %>
+      </div>
+    </div>
+  </footer>
+
+  <script src="/js/main.js"></script>
+</body>
+</html>

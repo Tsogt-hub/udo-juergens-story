@@ -1,0 +1,51 @@
+<%- include('partials/admin-header', { pageTitle: 'Bilder' }) %>
+
+  <!-- Upload Form -->
+  <div class="admin-card">
+    <h2>Neues Bild hochladen</h2>
+    <form method="POST" action="/admin/bilder/upload" enctype="multipart/form-data" class="admin-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label for="image">Bild auswählen *</label>
+          <input type="file" id="image" name="image" accept="image/*" required>
+          <small>Max. 10MB – JPG, PNG, GIF, WebP</small>
+        </div>
+        <div class="form-group">
+          <label for="title">Titel</label>
+          <input type="text" id="title" name="title" placeholder="Optionaler Titel">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="beschreibung">Beschreibung</label>
+        <textarea id="beschreibung" name="beschreibung" rows="2" placeholder="Optionale Beschreibung"></textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Bild hochladen</button>
+    </form>
+  </div>
+
+  <!-- Existing Images -->
+  <div class="admin-card">
+    <h2>Alle Bilder (<%= images.length %>)</h2>
+    <% if (images.length > 0) { %>
+      <div class="admin-images-grid">
+        <% images.forEach(function(img) { %>
+          <div class="admin-image-card">
+            <div class="admin-image-preview">
+              <img src="/uploads/images/<%= img.filename %>" alt="<%= img.title || 'Bild' %>">
+            </div>
+            <div class="admin-image-info">
+              <p class="admin-image-title"><%= img.title || 'Kein Titel' %></p>
+              <p class="admin-image-filename"><%= img.originalname %></p>
+              <form method="POST" action="/admin/bilder/delete/<%= img.id %>" onsubmit="return confirm('Bild wirklich löschen?')">
+                <button type="submit" class="btn btn-small btn-danger">Löschen</button>
+              </form>
+            </div>
+          </div>
+        <% }); %>
+      </div>
+    <% } else { %>
+      <p class="empty-text">Noch keine Bilder vorhanden.</p>
+    <% } %>
+  </div>
+
+<%- include('partials/admin-footer') %>

@@ -1,0 +1,44 @@
+<%- include('partials/header', { pageTitle: 'Termine' }) %>
+
+  <!-- Page Header -->
+  <section class="page-header">
+    <h1>Termine</h1>
+    <p class="page-header-sub">Alle kommenden Auftritte und Veranstaltungen</p>
+  </section>
+
+  <!-- Termine List -->
+  <section class="section">
+    <div class="container">
+      <% if (termine.length > 0) { %>
+        <div class="termine-list">
+          <% termine.forEach(function(termin) { %>
+            <div class="termin-row">
+              <div class="termin-date-block">
+                <span class="termin-day-large"><%= new Date(termin.datum).getDate() %></span>
+                <span class="termin-month-large"><%= ['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'][new Date(termin.datum).getMonth()] %></span>
+                <span class="termin-year-large"><%= new Date(termin.datum).getFullYear() %></span>
+              </div>
+              <div class="termin-details">
+                <h3><%= termin.venue %></h3>
+                <p class="termin-stadt-large"><%= termin.stadt %></p>
+                <% if (termin.zeit) { %><p class="termin-zeit">🕐 <%= termin.zeit %> Uhr</p><% } %>
+                <% if (termin.beschreibung) { %><p class="termin-desc"><%= termin.beschreibung %></p><% } %>
+              </div>
+              <div class="termin-action">
+                <% if (termin.ticket_link) { %>
+                  <a href="<%= termin.ticket_link %>" target="_blank" class="btn btn-primary">Tickets kaufen</a>
+                <% } %>
+              </div>
+            </div>
+          <% }); %>
+        </div>
+      <% } else { %>
+        <div class="empty-state">
+          <p>Derzeit sind keine Termine geplant.</p>
+          <p>Schauen Sie bald wieder vorbei!</p>
+        </div>
+      <% } %>
+    </div>
+  </section>
+
+<%- include('partials/footer') %>

@@ -1,0 +1,52 @@
+<%- include('partials/admin-header', { pageTitle: 'Dashboard' }) %>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-icon">📅</div>
+      <div class="stat-info">
+        <h3><%= stats.termine %></h3>
+        <p>Termine</p>
+      </div>
+      <a href="/admin/termine" class="stat-link">Verwalten →</a>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🖼️</div>
+      <div class="stat-info">
+        <h3><%= stats.images %></h3>
+        <p>Bilder</p>
+      </div>
+      <a href="/admin/bilder" class="stat-link">Verwalten →</a>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">💬</div>
+      <div class="stat-info">
+        <h3><%= stats.kritiken %></h3>
+        <p>Kritiken</p>
+      </div>
+      <a href="/admin/kritiken" class="stat-link">Verwalten →</a>
+    </div>
+  </div>
+
+  <div class="quick-actions">
+    <h2>Schnellzugriff</h2>
+    <div class="action-grid">
+      <a href="/admin/termine" class="action-card">
+        <span>📅</span>
+        <p>Neuen Termin hinzufügen</p>
+      </a>
+      <a href="/admin/bilder" class="action-card">
+        <span>🖼️</span>
+        <p>Bild hochladen</p>
+      </a>
+      <a href="/admin/kritiken" class="action-card">
+        <span>💬</span>
+        <p>Kritik hinzufügen</p>
+      </a>
+      <a href="/admin/einstellungen" class="action-card">
+        <span>⚙️</span>
+        <p>Einstellungen bearbeiten</p>
+      </a>
+    </div>
+  </div>
+
+<%- include('partials/admin-footer') %>

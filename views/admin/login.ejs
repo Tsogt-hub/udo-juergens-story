@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="login-page">
+  <div class="login-container">
+    <div class="login-card">
+      <h1>🎵 Admin-Panel</h1>
+      <p class="login-subtitle">Die Udo Jürgens Story</p>
+
+      <% if (typeof error !== 'undefined' && error.length > 0) { %>
+        <div class="flash flash-error"><%= error[0] %></div>
+      <% } %>
+
+      <form method="POST" action="/admin/login">
+        <div class="form-group">
+          <label for="username">Benutzername</label>
+          <input type="text" id="username" name="username" required autofocus>
+        </div>
+        <div class="form-group">
+          <label for="password">Passwort</label>
+          <input type="password" id="password" name="password" required>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">Anmelden</button>
+      </form>
+      <a href="/" class="login-back">← Zurück zur Website</a>
+    </div>
+  </div>
+</body>
+</html>

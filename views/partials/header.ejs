@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= typeof pageTitle !== 'undefined' ? pageTitle + ' – ' : '' %><%= settings.site_title || 'Die Udo Jürgens Story' %></title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo">
+        <span class="logo-text"><%= settings.site_title || 'Die Udo Jürgens Story' %></span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Menü öffnen">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="/" class="<%= currentPath === '/' ? 'active' : '' %>">Home</a></li>
+        <li><a href="/kuenstler" class="<%= currentPath === '/kuenstler' ? 'active' : '' %>">Künstler</a></li>
+        <li><a href="/termine" class="<%= currentPath === '/termine' ? 'active' : '' %>">Termine</a></li>
+        <li><a href="/kritiken" class="<%= currentPath === '/kritiken' ? 'active' : '' %>">Kritiken</a></li>
+        <li><a href="/presse" class="<%= currentPath === '/presse' ? 'active' : '' %>">Presse & Videos</a></li>
+        <li><a href="/kontakt" class="<%= currentPath === '/kontakt' ? 'active' : '' %>">Kontakt</a></li>
+        <% if (typeof settings.youtube_url !== 'undefined' && settings.youtube_url) { %>
+          <li><a href="<%= settings.youtube_url %>" target="_blank" class="nav-social">YouTube</a></li>
+        <% } %>
+        <% if (typeof settings.facebook_url !== 'undefined' && settings.facebook_url) { %>
+          <li><a href="<%= settings.facebook_url %>" target="_blank" class="nav-social">Facebook</a></li>
+        <% } %>
+      </ul>
+    </div>
+  </nav>
